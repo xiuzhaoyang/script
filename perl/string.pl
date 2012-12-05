@@ -8,8 +8,8 @@
 
 use strict;
 use warnings;
-my $firstName =  $ARGV[0] || "Agenda.string";
-my $secondName = $ARGV[1] || "Agenda.string";
+my $firstName =  $ARGV[0] || "./one.string";
+my $secondName = $ARGV[1] || "./two.string";
 open my $file,"<",$secondName or die "Fail to open $secondName $!";
 my %string;
 while(<$file>)
