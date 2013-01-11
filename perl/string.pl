@@ -8,36 +8,51 @@
 
 use strict;
 use warnings;
-my $firstName =  $ARGV[0] || "./one.string";
-my $secondName = $ARGV[1] || "./two.string";
-open my $file,"<",$secondName or die "Fail to open $secondName $!";
+
+
+my $firstName =  $ARGV[0] || "Agenda.string";
+
+my $secondName = $ARGV[1] || "Agenda.string";
+open my $file,"<",$firstName or die "Fail to open $secondName $!";
 my %string;
+# open (FH,"< $firstName");
 while(<$file>)
 {
+    # $_ =~ s/\r/\n/g;
+    # print "hello \n";
+    # print "$.";
+    # print "$_ ";
     next if !/=/;
+    next if /\/\//;
     my ($key,$value)=split/=/;
     $key =~ s/\s+//g;
     $value =~ s/\s+//g;
+    # print "$key\n";
     $string{$key} = $value;
 }
+close($file);
 
-open my $firstFile,"<",$firstName or die "Fail to open $firstName $!";
+
+
+open my $secondFile,"<",$secondName or die "Fail to open $firstName $!";
 my @keys;
-while(<$firstFile>)
+while(<$secondFile>)
 {
-    if( !/=/)
-    {
-        print ;
-    }
+    next if !/=/;
+    next if /\/\//;
     my($key,$value)=split/=/;
     $key =~ s/\s+//g;
     my $tempValue;
     $tempValue = $string{$key};
     if (defined  $tempValue)
     {
-        print "$key = $tempValue \n";
+       # print "$key = $tempValue \n";
+       delete($string{$key});
+       #print "$key";
     }
 }
+close($secondFile);
 
-
-
+while ( my($key,$value) = each %string ){
+    print "$key = $value \n";
+}
