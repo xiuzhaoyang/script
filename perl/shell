@@ -1,0 +1,14 @@
+################################
+#
+#使用的命令
+#
+#
+#################################
+
+
+
+for var in `find . -name "*.strings"`;
+do
+  tr "\r" "\n" < "../ja.lproj/${var/\.\//}" > /tmp/string ; 
+  ./string.pl $var  /tmp/string;
+done;
