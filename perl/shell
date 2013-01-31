@@ -12,3 +12,10 @@ do
   tr "\r" "\n" < "../ja.lproj/${var/\.\//}" > /tmp/string ; 
   ./string.pl $var  /tmp/string;
 done;
+
+
+for var in `find ./Resources/ja.lproj -name "*.strings"`; do   tr "\r" "\n" < ${var/\/Resources/} > /tmp/string1 ; tr "\r" "\n" < ${var} > /tmp/string2 ;./string.pl /tmp/string2 /tmp/string1 > $var ; done
+
+
+
+for var in `find ./Resources -name "*.strings"`; do ./string.pl $var  ${var/\/Resources/} > $var; done
